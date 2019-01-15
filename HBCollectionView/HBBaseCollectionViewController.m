@@ -1,6 +1,6 @@
 //
 //  HBBaseCollectionViewController.m
-//  TestCollectionView
+//  HBCollectionView
 //
 //  Created by Hepburn on 2018/12/20.
 //  Copyright © 2018 Hepburn. All rights reserved.
@@ -37,14 +37,31 @@
     self.collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
 }
 
-- (void)AddSectionModels:(NSString *)name models:(NSArray *)array section:(NSInteger)section {
+#pragma mark - Public
+
+- (void)RegisterItemClasses:(NSArray<NSString *> *)classnames {
+    for (NSString *classname in classnames) {
+        [self.collectionView registerClass:NSClassFromString(classname) forCellWithReuseIdentifier:classname];
+    }
+}
+
+- (void)RegisterHeaderClasses:(NSArray<NSString *> *)classnames {
+    for (NSString *classname in classnames) {
+        [self.collectionView registerClass:NSClassFromString(classname) forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:classname];
+    }
+}
+
+- (id)LoadCollectionViewLayout:(NSString *)classname {
+    id layout = [[NSClassFromString(classname) alloc] init];
+    [self.collectionView setCollectionViewLayout:layout];
+    return layout;
+}
+
+- (void)LoadSectionModels:(NSString *)classname models:(NSArray *)array section:(NSInteger)section {
     HBBaseCollectionModel *model = [[HBBaseCollectionModel alloc] init];
-    model.identifier = name;
+    model.identifier = classname;
     [model.modelList addObjectsFromArray:array];
     [self.modelDict setObject:model forKey:@(section)];
-    
-    //注册Cell
-    [self.collectionView registerClass:NSClassFromString(name) forCellWithReuseIdentifier:name];
 }
 
 #pragma mark -- UICollectionViewDataSource

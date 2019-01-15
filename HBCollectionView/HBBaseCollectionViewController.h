@@ -1,6 +1,6 @@
 //
 //  HBBaseCollectionViewController.h
-//  TestCollectionView
+//  HBCollectionView
 //
 //  Created by Hepburn on 2018/12/20.
 //  Copyright © 2018 Hepburn. All rights reserved.
@@ -14,7 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, strong) UICollectionView *collectionView;
 
-- (void)AddSectionModels:(NSString *)name models:(NSArray *)array section:(NSInteger)section;
+- (void)LoadSectionModels:(NSString *)classname models:(NSArray *)array section:(NSInteger)section;
+- (void)RegisterItemClasses:(NSArray<NSString *> *)classnames;
+- (void)RegisterHeaderClasses:(NSArray<NSString *> *)classnames;
+- (id)LoadCollectionViewLayout:(NSString *)classname;
 
 @end
 

@@ -1,6 +1,6 @@
 //
 //  HBBaseCollectionViewLayout.m
-//  TestCollectionView
+//  HBCollectionView
 //
 //  Created by Hepburn on 2018/12/20.
 //  Copyright © 2018 Hepburn. All rights reserved.
@@ -12,6 +12,7 @@
     CGFloat totalHeight;
 }
 
+@property (nonatomic, strong) NSMutableDictionary *decorationDict;
 @property (nonatomic, strong) NSMutableDictionary *headerAttributes;
 @property (nonatomic, strong) NSMutableDictionary *footerAttributes;
 @property (nonatomic, strong) NSMutableArray *sectionItemAttributes;
@@ -21,6 +22,13 @@
 @end
 
 @implementation HBBaseCollectionViewLayout
+
+- (NSMutableDictionary *)decorationDict {
+    if (!_decorationDict) {
+        _decorationDict = [[NSMutableDictionary alloc] initWithCapacity:10];
+    }
+    return _decorationDict;
+}
 
 - (NSMutableDictionary *)headerAttributes {
     if (!_headerAttributes) {
@@ -58,7 +66,18 @@
 }
 
 - (void)prepareLayout{
+    NSLog(@"prepareLayout");
     [super prepareLayout];
+}
+
+#pragma mark - Public
+
+- (void)RegisterDecorationKindForSection:(NSString *)classname :(NSInteger)section {
+    if (!classname) {
+        return;
+    }
+    [self registerClass:NSClassFromString(classname) forDecorationViewOfKind:classname];
+    [self.decorationDict setObject:classname forKey:@(section)];
 }
 
 - (void)reloadLayoutAttributes {
@@ -106,8 +125,8 @@
                 }
             }
             //创建背景
-            if (_decorationKindForSection && _decorationFrameForIndexPath) {
-                NSString *kindname = _decorationKindForSection(indexPath.section);
+            NSString *kindname = self.decorationDict[@(indexPath.section)];
+            if (kindname) {
                 CGRect decorationFrame = _decorationFrameForIndexPath(indexPath, totalHeight);
                 if (kindname && !CGRectIsEmpty(decorationFrame)) {
                     UICollectionViewLayoutAttributes* attributes = [UICollectionViewLayoutAttributes layoutAttributesForDecorationViewOfKind:kindname withIndexPath:indexPath];
@@ -127,6 +146,8 @@
     [self.sectionItemAttributes addObjectsFromArray:layoutInfoArr];
     [self.decorationAttributes addObjectsFromArray:decorationArr];
 }
+
+#pragma mark - UICollectionViewLayout
 
 - (CGSize)collectionViewContentSize{
     return CGSizeMake(self.collectionView.frame.size.width, MAX(self.collectionView.frame.size.height, totalHeight));

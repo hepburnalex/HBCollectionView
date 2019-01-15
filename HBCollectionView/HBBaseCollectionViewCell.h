@@ -1,9 +1,9 @@
 //
 //  HBBaseCollectionViewCell.h
-//  TestCollectionView
+//  HBCollectionView
 //
 //  Created by Hepburn on 2018/12/20.
-//  Copyright © 2018 ihope. All rights reserved.
+//  Copyright © 2018 Hepburn. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
