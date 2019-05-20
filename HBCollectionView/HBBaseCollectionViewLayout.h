@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HBBaseCollectionViewLayout : UICollectionViewLayout
 
+@property (nonatomic, copy) NSInteger(^TypeOfSectionRow)(NSInteger section, NSInteger row);
 @property (nonatomic, copy) CGRect(^headerFrameForSection)(NSInteger section, CGFloat top);
 @property (nonatomic, copy) CGRect(^itemFrameForIndexPath)(NSIndexPath *indexPath, CGFloat top);
 @property (nonatomic, copy) CGRect(^decorationFrameForIndexPath)(NSIndexPath *indexPath, CGFloat top);

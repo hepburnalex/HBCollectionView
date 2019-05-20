@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HBBaseCollectionViewLayout.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,7 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)LoadSectionModels:(NSString *)classname models:(NSArray *)array section:(NSInteger)section;
 - (void)RegisterItemClasses:(NSArray<NSString *> *)classnames;
 - (void)RegisterHeaderClasses:(NSArray<NSString *> *)classnames;
-- (id)LoadCollectionViewLayout:(NSString *)classname;
+- (HBBaseCollectionViewLayout *)LoadCollectionViewLayout:(NSString *)classname;
+- (void)CleanModels;
 
 @end
 

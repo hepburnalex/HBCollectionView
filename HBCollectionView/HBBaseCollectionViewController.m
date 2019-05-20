@@ -51,10 +51,15 @@
     }
 }
 
-- (id)LoadCollectionViewLayout:(NSString *)classname {
+- (HBBaseCollectionViewLayout *)LoadCollectionViewLayout:(NSString *)classname {
     id layout = [[NSClassFromString(classname) alloc] init];
     [self.collectionView setCollectionViewLayout:layout];
     return layout;
+}
+
+- (void)CleanModels {
+    [self.modelDict removeAllObjects];
+    [self.collectionView reloadData];
 }
 
 - (void)LoadSectionModels:(NSString *)classname models:(NSArray *)array section:(NSInteger)section {
