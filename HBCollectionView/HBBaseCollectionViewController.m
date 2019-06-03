@@ -9,7 +9,7 @@
 #import "HBBaseCollectionViewController.h"
 #import "HBBaseCollectionModel.h"
 #import "HBBaseCollectionViewCell.h"
-#import <Masonry.h>
+#import <Masonry/Masonry.h>
 
 #ifndef WS//(weakSelf)
 #define WS(weakSelf)  __weak __typeof (&*self)weakSelf = self
