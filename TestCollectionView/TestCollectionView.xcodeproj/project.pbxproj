@@ -25,6 +25,7 @@
 		1B4162062228E32000E15900 /* HBBaseCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4162002228E32000E15900 /* HBBaseCollectionViewCell.m */; };
 		1B4162072228E32000E15900 /* HBBaseCollectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4162022228E32000E15900 /* HBBaseCollectionModel.m */; };
 		1B4162082228E32000E15900 /* HBBaseCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B4162042228E32000E15900 /* HBBaseCollectionViewController.m */; };
+		1B58F8B922A4D0FE0073A554 /* HBRefreshCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B58F8B722A4D0FD0073A554 /* HBRefreshCollectionView.m */; };
 		1D77D7CCE2AAC36D104B2F47 /* libPods-TestCollectionView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A03497F4816D222A54D307 /* libPods-TestCollectionView.a */; };
 		54460ACB5EC21F6003C74F99 /* libPods-TestCollectionView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 180121AA8C85FFB0147B18FA /* libPods-TestCollectionView.a */; };
 /* End PBXBuildFile section */
@@ -66,6 +67,8 @@
 		1B4162022228E32000E15900 /* HBBaseCollectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBBaseCollectionModel.m; sourceTree = "<group>"; };
 		1B4162032228E32000E15900 /* HBBaseCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBBaseCollectionViewCell.h; sourceTree = "<group>"; };
 		1B4162042228E32000E15900 /* HBBaseCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBBaseCollectionViewController.m; sourceTree = "<group>"; };
+		1B58F8B722A4D0FD0073A554 /* HBRefreshCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBRefreshCollectionView.m; sourceTree = "<group>"; };
+		1B58F8B822A4D0FD0073A554 /* HBRefreshCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBRefreshCollectionView.h; sourceTree = "<group>"; };
 		1E85843BA021B1D23261D5E9 /* Pods-TestCollectionView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestCollectionView.release.xcconfig"; path = "Pods/Target Support Files/Pods-TestCollectionView/Pods-TestCollectionView.release.xcconfig"; sourceTree = "<group>"; };
 		555AD6118285F91307166556 /* Pods-TestCollectionView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestCollectionView.release.xcconfig"; path = "Pods/Target Support Files/Pods-TestCollectionView/Pods-TestCollectionView.release.xcconfig"; sourceTree = "<group>"; };
 		8BA30FD7CA219B296027066F /* Pods-TestCollectionView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestCollectionView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TestCollectionView/Pods-TestCollectionView.debug.xcconfig"; sourceTree = "<group>"; };
@@ -180,6 +183,8 @@
 		1B4161FB2228E32000E15900 /* HBCollectionView */ = {
 			isa = PBXGroup;
 			children = (
+				1B58F8B822A4D0FD0073A554 /* HBRefreshCollectionView.h */,
+				1B58F8B722A4D0FD0073A554 /* HBRefreshCollectionView.m */,
 				1B4161FC2228E32000E15900 /* HBBaseCollectionHeader.h */,
 				1B4161FD2228E32000E15900 /* HBBaseCollectionModel.h */,
 				1B4162022228E32000E15900 /* HBBaseCollectionModel.m */,
@@ -292,10 +297,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-TestCollectionView/Pods-TestCollectionView-resources.sh",
 				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
+				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -351,6 +358,7 @@
 				1B4162082228E32000E15900 /* HBBaseCollectionViewController.m in Sources */,
 				1B4161E82228E1BF00E15900 /* LNRBookModel.m in Sources */,
 				1B4161F62228E1CC00E15900 /* LNRGroupHeaderView.m in Sources */,
+				1B58F8B922A4D0FE0073A554 /* HBRefreshCollectionView.m in Sources */,
 				1B4161F32228E1CC00E15900 /* LNRRandomCell.m in Sources */,
 				1B086B6B21CA582C0061BE83 /* AppDelegate.m in Sources */,
 				1B4161FA2228E1D400E15900 /* LNRBookViewModel.m in Sources */,
@@ -501,10 +509,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = TestCollectionView/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.iHope.TestCollectionView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -519,10 +524,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = TestCollectionView/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.iHope.TestCollectionView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

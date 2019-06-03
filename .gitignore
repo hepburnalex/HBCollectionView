@@ -62,3 +62,6 @@ fastlane/test_output
 
 iOSInjectionProject/
 .DS_Store
+Pod/
+Podfile.lock
+*.xcuserdatad

@@ -6,14 +6,15 @@
 //  Copyright © 2018 Hepburn. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "UIKit/UIKit.h"
+#import "HBRefreshCollectionView.h"
 #import "HBBaseCollectionViewLayout.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HBBaseCollectionViewController : UIViewController<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface HBBaseCollectionViewController : UIViewController<UICollectionViewDelegate, UICollectionViewDataSource,  HBRefreshCollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
-@property(nonatomic, strong) UICollectionView *collectionView;
+@property(nonatomic, strong) HBRefreshCollectionView *collectionView;
 
 - (void)LoadSectionModels:(NSString *)classname models:(NSArray *)array section:(NSInteger)section;
 - (void)RegisterItemClasses:(NSArray<NSString *> *)classnames;

@@ -3,6 +3,7 @@ inhibit_all_warnings!
 
 target 'TestCollectionView' do
     pod 'Masonry'
+    pod 'MJRefresh'
     pod 'IQKeyboardManager'
     pod 'MBProgressHUD'
 end

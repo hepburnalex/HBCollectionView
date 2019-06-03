@@ -9,6 +9,11 @@
 #import "HBBaseCollectionViewController.h"
 #import "HBBaseCollectionModel.h"
 #import "HBBaseCollectionViewCell.h"
+#import <Masonry.h>
+
+#ifndef WS//(weakSelf)
+#define WS(weakSelf)  __weak __typeof (&*self)weakSelf = self
+#endif
 
 @interface HBBaseCollectionViewController ()
 
@@ -18,13 +23,14 @@
 
 @implementation HBBaseCollectionViewController
 
-- (UICollectionView *)collectionView{
+- (HBRefreshCollectionView *)collectionView{
     if (!_collectionView) {
-        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
-        _collectionView.delegate = self;
-        _collectionView.dataSource = self;
-        _collectionView.backgroundColor = [UIColor whiteColor];
+        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        _collectionView = [[HBRefreshCollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+        _collectionView.refreshDelegate = self;
+        if (@available(iOS 10.0, *)) {
+            [_collectionView setPrefetchingEnabled:NO];
+        }
     }
     return _collectionView;
 }
@@ -33,8 +39,11 @@
     [super viewDidLoad];
     self.modelDict = [[NSMutableDictionary alloc] init];
     [self.view addSubview:self.collectionView];
-    self.collectionView.frame = self.view.bounds;
-    self.collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+    WS(weakSelf);
+    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        if (@available(ios 11.0,*)) make.edges.mas_equalTo(weakSelf.view.safeAreaInsets);
+        else make.edges.mas_equalTo(weakSelf.view);
+    }];
 }
 
 #pragma mark - Public
